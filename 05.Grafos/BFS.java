@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,7 +45,9 @@ public class BFS
     private void bfs(String v)
     {
         // Inicializa uma fila de vértices (dica: use LinkedList)
+        LinkedList<String> fila = new LinkedList<>();
         // Adiciona primeiro vértice na fila (v)
+        fila.add(v);
         // Marca v como visitado
         marked.add(v);
         // Registra que não há ninguém antes dele
@@ -53,11 +56,22 @@ public class BFS
         distTo.put(start, 0); // distância da origem até ela mesma = 0
 
         // Enquanto a fila não estiver vazia:
-        // - Retira o primeiro vértice da fila
-        // - Marca ele
-        // - Para cada vizinho não marcado:
-        //   - Ajusta edgeTo
-        //   - Ajusta distTo
-        //   - Insere o vizinho na fila 
+        while(!fila.isEmpty()) {
+            // - Retira o primeiro vértice da fila
+            v = fila.removeFirst();
+            // - Marca ele
+            marked.add(v);
+            // - Para cada vizinho não marcado:
+            for(String w: g.getAdj(v)) {
+                if(!marked.contains(w)) {
+                    //   - Ajusta edgeTo
+                    edgeTo.put(w, v);
+                    //   - Ajusta distTo
+                    distTo.put(w, distTo.get(v)+1);
+                    //   - Insere o vizinho na fila
+                    fila.add(w); 
+                }
+            }
+        }
     }
 }
