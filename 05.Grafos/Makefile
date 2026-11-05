@@ -1,6 +1,6 @@
 CPPFLAGS = -Wall -g -std=c++17   # Opções do compilador: todos warnings e debug info
 
-all: appgraph appdigraph appdfs appbfs
+all: appgraph appdigraph appdfs appbfs appciclonaodirigido appciclodirigido apptopo appufind appewgraph appkruskal
 
 # classe Graph
 appgraph = appgraph
@@ -22,6 +22,36 @@ appbfs = appbfs
 appbfs_src = appbfs.cpp graph.cpp bfs.cpp
 appbfs_obj = $(appbfs_src:.cpp=.o)
 
+# Ciclos nao dirigidos
+appciclonaodirigido = appciclonaodirigido
+appciclonaodirigido_src = appciclonaodirigido.cpp ciclonaodirigido.cpp graph.cpp
+appciclonaodirigido_obj = $(appciclonaodirigido_src:.cpp=.o)
+
+# Ciclos dirigidos
+appciclodirigido = appciclodirigido
+appciclodirigido_src = appciclodirigido.cpp ciclodirigido.cpp digraph.cpp graph.cpp
+appciclodirigido_obj = $(appciclodirigido_src:.cpp=.o)
+
+# Ordem topologica
+apptopo = apptopo
+apptopo_src = apptopo.cpp ordtopologica.cpp digraph.cpp graph.cpp
+apptopo_obj = $(apptopo_src:.cpp=.o)
+
+# classe UnionFind
+appufind = appufind
+appufind_src = appunionfind.cpp unionfind.cpp edgeweightedgraph.cpp
+appufind_obj = $(appufind_src:.cpp=.o)
+
+# classe EdgeWeightedGraph
+appewgraph = appewgraph
+appewgraph_src = appewgraph.cpp edgeweightedgraph.cpp
+appewgraph_obj = $(appewgraph_src:.cpp=.o)
+
+# classe KruskalMST
+appkruskal = appkruskal
+appkruskal_src = kruskalmst.cpp edgeweightedgraph.cpp appkruskal.cpp unionfind.cpp
+appkruskal_obj = $(appkruskal_src:.cpp=.o)
+
 $(appgraph): $(appgraph_obj)
 	g++ $(CPPFLAGS) $(appgraph_obj) -o $@
 
@@ -34,9 +64,33 @@ $(appdfs): $(appdfs_obj)
 $(appbfs): $(appbfs_obj)
 	g++ $(CPPFLAGS) $(appbfs_obj) -o $@
 
+$(appciclonaodirigido): $(appciclonaodirigido_obj)
+	g++ $(CPPFLAGS) $(appciclonaodirigido_obj) -o $@
+
+$(appciclodirigido): $(appciclodirigido_obj)
+	g++ $(CPPFLAGS) $(appciclodirigido_obj) -o $@
+
+$(apptopo): $(apptopo_obj)
+	g++ $(CPPFLAGS) $(apptopo_obj) -o $@
+
+$(appufind): $(appufind_obj)
+	g++ $(CPPFLAGS) $(appufind_obj) -o $@
+
+$(appewgraph): $(appewgraph_obj)
+	g++ $(CPPFLAGS) $(appewgraph_obj) -o $@
+
+$(appkruskal): $(appkruskal_obj)
+	g++ $(CPPFLAGS) $(appkruskal_obj) -o $@
+
 clean:
 	-@ rm -f $(appgraph_obj) $(appgraph) $(appdgraph_obj) $(appdgraph) $(appdfs) \
-		     $(appbfs) $(appbfs_obj)
+		     $(appbfs) $(appbfs_obj) \
+		     $(appciclonaodirigido_obj) $(appciclonaodirigido) \
+		     $(appciclodirigido_obj) $(appciclodirigido) \
+		     $(apptopo_obj) $(apptopo) \
+	       $(appufind_obj) $(appufind) \
+	       $(appewgraph_obj) $(appewgraph) \
+	       $(appkruskal_obj) $(appkruskal)
 
 
 	   	
