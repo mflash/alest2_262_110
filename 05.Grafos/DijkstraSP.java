@@ -70,8 +70,8 @@ public class DijkstraSP {
     }
 
     public static void main(String[] args) {
-        // EdgeWeightedDigraph g = new EdgeWeightedDigraph("exemplos/tinyEWD.txt");
-        EdgeWeightedDigraph g = new EdgeWeightedDigraph("exemplos/mediumEWG.txt");
+        EdgeWeightedDigraph g = new EdgeWeightedDigraph("exemplos/tinyEWD.txt");
+        // EdgeWeightedDigraph g = new EdgeWeightedDigraph("exemplos/mediumEWG.txt");
         DijkstraSP dij = new DijkstraSP(g, "0");
 
         for (String v : g.getVerts().stream().sorted().toList()) {
