@@ -21,7 +21,7 @@ public:
 private:
   std::string s;
 	std::map<std::string, Edge> edgeTo;
-	std::map<std::string, int> _distTo;
+	std::map<std::string, float> _distTo;
   IndexMinHeap<std::string, float> pq;
 	void bfs(EdgeWeightedDigraph &g, std::string v);
 
